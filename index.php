@@ -4,7 +4,7 @@
 <?php require $_SERVER['DOCUMENT_ROOT'] . '/components/head.php' ?>
 
 <body class="bg-dark text-white d-flex flex-column vh-100">
-  <div class="container my-5 flex-grow-1">
+  <div class="container mt-5 flex-grow-1">
     <!-- Header -->
     <div class="text-center mb-4">
       <p class="text-light">Manage your tasks effortlessly</p>
