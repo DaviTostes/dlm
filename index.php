@@ -1,3 +1,16 @@
+<?php
+
+use DLM\Repository\UserRepository;
+
+require $_SERVER['DOCUMENT_ROOT'] . '/repository/UserRepository.php';
+
+$token_verified = (new UserRepository())->verify_user_token();
+
+if ($token_verified === '') {
+  header('Location: /login.php');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,11 +40,6 @@
     <!-- Task List Section -->
     <div id="tasks" hx-get="/views/task/list.php" hx-trigger="load"></div>
   </div>
-
-  <!-- Footer -->
-  <footer class="text-center mt-5">
-    <p class="text-light">&copy; 2024 DLM. All rights reserved.</p>
-  </footer>
 
   <script>
     document.addEventListener('htmx:afterRequest', function(event) {

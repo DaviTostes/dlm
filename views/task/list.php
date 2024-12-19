@@ -1,21 +1,22 @@
 <?php
 
 use DLM\Repository\TaskRepository;
+use DLM\Repository\UserRepository;
 
 require $_SERVER['DOCUMENT_ROOT'] . '/repository/TaskRepository.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/repository/UserRepository.php';
 
 if (isset($_SERVER['HTTP_HX_REQUEST']) && $_SERVER['REQUEST_METHOD'] === 'GET') {
-  $repo = new TaskRepository();
+  $task_repo = new TaskRepository();
+  $user_repo = new UserRepository();
 
-  $tasks = $repo->list_all();
-
-  $total = count(($tasks));
+  $tasks = $task_repo->list_all($user_repo->verify_user_token());
 ?>
-  <span id="taskCount" class="badge bg-light text-dark mb-3">Total: <?php echo $total; ?></span>
+  <span id="taskCount" class="badge bg-light text-dark mb-3">Total: <?php echo count($tasks); ?></span>
   <ul class="list-group list-group-flush gap-3">
     <?php foreach ($tasks as $key => $task) { ?>
     <li class="list-group-item bg-dark text-white d-flex justify-content-between align-items-center border <?php echo $task['done'] ? '' : "border-success" ?> py-3 rounded">
-        <span><?php echo $task['name'] ?></span>
+      <span class="<?php echo $task['done'] ? '' : 'text-success' ?>"><?php echo $task['name'] ?></span>
         <div>
           <button class="btn btn-sm btn-success me-2" id="toogle-task"
           hx-post="/services/task/toogle.php/<?php echo $task['id'] ?>"

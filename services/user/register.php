@@ -1,30 +1,28 @@
 <?php
 
-use DLM\Repository\TaskRepository;
 use DLM\Repository\UserRepository;
 
-require $_SERVER['DOCUMENT_ROOT'] . '/repository/TaskRepository.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/repository/UserRepository.php';
 
 if (isset($_SERVER['HTTP_HX_REQUEST']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
   $toast_type = '';
   $toast_message = '';
 
-  $task_repo = new TaskRepository();
-  $user_repo = new UserRepository();
+  $repo = new UserRepository();
 
-  $user_id = $user_repo->verify_user_token();
-
-  if ($user_id != '') {
-    $task_id = $task_repo->insert($_POST['name'], $user_id);
-  }
+  $task_id = $repo->insert(name: $_POST['name'], password: $_POST['password']);
 
   if (isset($task_id)) {
-    $toast_type = 'success';
-    $toast_message = 'Task Created';
+    if ($task_id === -1) {
+      $toast_type = 'danger';
+      $toast_message = 'Username Already Exists';
+    } else {
+      $toast_type = 'success';
+      $toast_message = 'User Created';
+    }
   } else {
     $toast_type = 'danger';
-    $toast_message = 'Error Creating Task';
+    $toast_message = 'Error Creating User';
   }
 ?>
   <!-- Toast Container -->

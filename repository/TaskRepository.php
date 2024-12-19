@@ -2,7 +2,7 @@
 
 namespace DLM\Repository;
 
-require $_SERVER['DOCUMENT_ROOT'] . '/db/Config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/db/Config.php';
 
 use PDO;
 use DLM\Db\Config;
@@ -16,25 +16,30 @@ class TaskRepository
     $this->pdo = new \PDO('sqlite:' . Config::PATH_TO_SQLITE_FILE);
   }
 
-  public function insert(string $name): int
+  public function insert(string $name, string $user_id): int
   {
-    $sql = 'INSERT INTO tasks(name, done) VALUES(:name, :done)';
+    $sql = 'INSERT INTO tasks(name, done, user_id) VALUES(:name, :done, :user_id)';
 
     $stmt = $this->pdo->prepare($sql);
 
     $stmt->bindValue(':name', $name);
     $stmt->bindValue(':done', 1);
+    $stmt->bindValue(':user_id', $user_id);
 
     $stmt->execute();
 
     return $this->pdo->lastInsertId();
   }
 
-  public function list_all(): mixed
+  public function list_all(string $user_id): mixed
   {
-    $stmt = $this->pdo->query(
-      'SELECT * FROM tasks'
+    $stmt = $this->pdo->prepare(
+      'SELECT * FROM tasks WHERE user_id = :user_id'
     );
+
+    $stmt->bindValue(':user_id', $user_id);
+
+    $stmt->execute();
 
     $rows = [];
 

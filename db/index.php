@@ -5,10 +5,6 @@ require $_SERVER['DOCUMENT_ROOT'] . '/db/Config.php';
 use DLM\Db\Config;
 use DLM\Db\CreateTable;
 
-if (!isset($_COOKIE['password']) || $_COOKIE['password'] != 'zreG4tnu') {
-  header('Location: /');
-}
-
 $sqlite = new CreateTable((new \PDO('sqlite:' . Config::PATH_TO_SQLITE_FILE)));
 
 $sqlite->create_tables();
@@ -18,13 +14,7 @@ $tables = $sqlite->get_table_list();
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="view tables">
-  <title>Check Tables</title>
-  <link href="../utils/bootstrap.min.css" rel="stylesheet">
-</head>
+<?php require $_SERVER['DOCUMENT_ROOT'] . '/components/head.php' ?>
 
 <body>
   <header class="page-header m-3">
