@@ -98,10 +98,6 @@ class TaskRepository
 
   public function resetTasks(): void
   {
-    $date = new \DateTime('now', new \DateTimeZone('America/Sao_Paulo'));
-
-    if ($date->format('H:i') == '00:00') {
-      $this->pdo->exec('UPDATE tasks set done = 1');
-    }
+    $this->pdo->exec('UPDATE tasks set done = 1');
   }
 }
