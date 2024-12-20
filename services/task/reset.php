@@ -6,7 +6,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/repository/TaskRepository.php';
 
 $date = (new DateTime('now', new DateTimeZone('America/Sao_Paulo')))->format('H:i');
 
-if ($date == '15:36') {
+if ($date == '00:00') {
   $repo = new TaskRepository();
 
   $repo->resetTasks();
