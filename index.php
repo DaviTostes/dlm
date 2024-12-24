@@ -24,6 +24,13 @@ if ($token_verified === '') {
       <p class="text-light">Manage your tasks effortlessly</p>
     </div>
 
+    <!-- Sign out -->
+    <div class="d-flex justify-content-end mb-3">
+      <button class="btn btn-danger p-2 border-danger rounded" hx-post="/services/task/sign-out.php">
+        <i class="bi bi-box-arrow-left"></i>
+      </button>
+    </div>
+
     <!-- Add Task Section -->
     <div class="mb-4">
       <form class="d-flex" id="add-task-form" hx-post="/services/task/new.php" hx-target="#new-resp">
