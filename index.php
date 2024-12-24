@@ -24,11 +24,22 @@ if ($token_verified === '') {
       <p class="text-light">Manage your tasks effortlessly</p>
     </div>
 
-    <!-- Sign out -->
-    <div class="d-flex justify-content-end mb-3">
-      <button class="btn btn-danger p-2 border-danger rounded" hx-post="/services/task/sign-out.php">
-        <i class="bi bi-box-arrow-left"></i>
-      </button>
+
+    <!-- Option Buttons -->
+    <div class="d-flex justify-content-end gap-2">
+      <!-- Stats -->
+      <div class="mb-3">
+        <button class="btn btn-primary p-2 rounded">
+          <i class="bi bi-bar-chart-fill"></i>
+        </button>
+      </div>
+
+      <!-- Sign out -->
+      <div class="mb-3">
+        <button class="btn btn-danger p-2 rounded" hx-post="/services/task/sign-out.php">
+          <i class="bi bi-box-arrow-left"></i>
+        </button>
+      </div>
     </div>
 
     <!-- Add Task Section -->
