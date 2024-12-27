@@ -70,6 +70,7 @@ class UserRepository
       }
 
       setcookie("token", $token_result, time() + 3600 * 24 * 7, '/');
+      setcookie("user_id", $user['id'], time() + 3600 * 24 * 7, '/');
 
       return password_verify($password, $user['password']);
     }

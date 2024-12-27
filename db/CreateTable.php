@@ -37,7 +37,8 @@ class CreateTable
 
     $this->pdo->exec(
       'CREATE TABLE IF NOT EXISTS task_stats(
-        date DATE PRIMARY KEY,
+        id INTEGER PRIMARY KEY,
+        date DATE NOT NULL,
         total INTEGER NOT NULL,
         done INTEGER NOT NULL,
         pending INTEGER NOT NULL,
