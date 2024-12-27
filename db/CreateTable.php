@@ -34,6 +34,15 @@ class CreateTable
         token TEXT
       )'
     );
+
+    $this->pdo->exec(
+      'CREATE TABLE IF NOT EXISTS task_stats(
+        date DATE PRIMARY KEY,
+        total INTEGER NOT NULL,
+        done INTEGER NOT NULL,
+        pending INTEGER NOT NULL
+      )'
+    );
   }
 
   public function get_table_list(): array
