@@ -29,7 +29,7 @@ if ($token_verified === '') {
     <div class="d-flex justify-content-end gap-2">
       <!-- Stats -->
       <div class="mb-3">
-        <button class="btn btn-primary p-2 rounded">
+        <button class="btn btn-primary p-2 rounded" hx-get="/stats.php" hx-target="body" hx-push-url="true">
           <i class="bi bi-bar-chart-fill"></i>
         </button>
       </div>

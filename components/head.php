@@ -6,4 +6,5 @@
   <link href="/utils/bootstrap.min.css" rel="stylesheet">
   <script src="/utils/bootstrap.bundle.min.js"></script>
   <script src="/utils/htmx.min.js"></script>
+  <script src="/utils/chart.js"></script>
 </head>

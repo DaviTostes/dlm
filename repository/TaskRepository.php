@@ -98,6 +98,32 @@ class TaskRepository
 
   public function resetTasks(): void
   {
+    $this->pdo->exec('
+      INSERT INTO task_stats (date, total, done, pending)
+      SELECT 
+        CURRENT_DATE - 1 AS date,
+        COUNT(*) AS total,
+        COUNT(CASE WHEN done = 0 THEN 1 END) AS done,
+        COUNT(CASE WHEN done = 1 THEN 1 END) AS pending
+      FROM tasks;'
+    );
+
     $this->pdo->exec('UPDATE tasks set done = 1');
+  }
+
+  public function list_stats(): mixed {
+    $stmt = $this->pdo->prepare(
+      'SELECT * FROM task_stats'
+    );
+
+    $stmt->execute();
+
+    $rows = [];
+
+    while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+      $rows[] = $row;
+    }
+
+    return $rows;
   }
 }
