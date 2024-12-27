@@ -40,7 +40,9 @@ class CreateTable
         date DATE PRIMARY KEY,
         total INTEGER NOT NULL,
         done INTEGER NOT NULL,
-        pending INTEGER NOT NULL
+        pending INTEGER NOT NULL,
+        user_id INTEGER NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users(id)
       )'
     );
   }
